@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-hugo-aws:
+  build:
     context: docker creds
     docker:
       - image: circleci/buildpack-deps
