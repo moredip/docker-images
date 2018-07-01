@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build-hugo-aws:
+    docker:
     steps:
       - checkout
       - setup_remote_docker:
