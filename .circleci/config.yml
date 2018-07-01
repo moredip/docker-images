@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-hugo-aws:
+  build:
     docker:
     steps:
       - checkout
