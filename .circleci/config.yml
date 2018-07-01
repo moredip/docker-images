@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build-hugo-aws:
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: ci-scripts/build-and-push hugo-aws
+

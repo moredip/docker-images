@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e -u
+
+IMAGE=${1}
+VERSION="${CIRCLE_SHA1}:${CIRCLE_BUILD_NUM}"
+FULL_TAG="moredip/${IMAGE}:${VERSION}"
+
+docker login -u $DOCKER_USER -p $DOCKER_PASS
+cd $IMAGE
+docker build -t ${FULL_TAG} .
+docker push ${FULL_TAG}
