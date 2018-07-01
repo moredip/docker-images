@@ -1,9 +1,18 @@
 version: 2
+
 jobs:
-  build-hugo-aws:
+  build-and-push:
+    docker:
+      - image: circleci/buildpack-deps
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run: ci-scripts/build-and-push hugo-aws
 
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-and-push:
+          context: docker creds
