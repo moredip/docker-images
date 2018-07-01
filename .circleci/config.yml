@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build:
+  build-and-push:
     docker:
       - image: circleci/buildpack-deps
     steps:
@@ -14,5 +14,5 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
-        context: docker creds
+      - build-and-push:
+          context: docker creds
