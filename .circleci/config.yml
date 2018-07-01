@@ -1,7 +1,7 @@
 version: 2
+
 jobs:
   build:
-    context: docker creds
     docker:
       - image: circleci/buildpack-deps
     steps:
@@ -10,3 +10,9 @@ jobs:
           docker_layer_caching: true
       - run: ci-scripts/build-and-push hugo-aws
 
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+        context: docker creds
