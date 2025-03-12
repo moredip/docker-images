@@ -3,14 +3,13 @@
 # - https://github.com/jonathanbp/docker-alpine-hugo/blob/ec4ad7a17b18cd543c4306e53bcb9326d2ccc246/Dockerfile
 
 
-FROM alpine:3.6
+FROM alpine:3.21
 
-ENV HUGO_VERSION 0.37.1
+ENV HUGO_VERSION 0.140.0
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_linux-64bit
 
 RUN apk -v --update add \
-        python \
-        py-pip \
+        python3 \
         groff \
         less \
         mailcap \
@@ -18,10 +17,12 @@ RUN apk -v --update add \
 				bash \
 				git \
 				openssh \
+        py3-pip \
         && \
-    pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic && \
-    apk -v --purge del py-pip && \
     rm /var/cache/apk/*
+
+RUN pip3 install --break-system-packages --no-cache --upgrade awscli pygments s3cmd python-magic
+
 
 ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY}.tar.gz /tmp/hugo.tar.gz
 
